@@ -15,11 +15,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['middleware' => ['guest']], function () {
 Auth::routes();
+});
+
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
 Route::get('admin/dashboard','AdminController@index');
+
+
 Route::get('admin/login','Admin\LoginController@showLoginForm')->name('admin.login.link');
 Route::get('admin/register','Admin\RegisterController@showRegistrationForm')->name('admin.register.link');
 
